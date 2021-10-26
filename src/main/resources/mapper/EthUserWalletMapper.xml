@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eth.web3j.mapper.EthUserWalletMapper">
+	<resultMap id="BaseResultMap" type="com.eth.web3j.domain.EthUserWallet">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uid" property="uid" jdbcType="BIGINT" />
+		<result column="coin_id" property="coinId" jdbcType="BIGINT" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="lower_address" property="lowerAddress" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="keystore" property="keystore" jdbcType="VARCHAR" />
+		<result column="valid" property="valid" jdbcType="CHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,
+		uid,
+		coin_id,
+		address,
+		lower_address,
+		password,
+		keystore,
+		valid,
+		create_time,
+		update_time
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+				<if test="id != null">
+					id = #{id,jdbcType=BIGINT}
+				</if>
+				<if test="uid != null">
+					and uid = #{uid,jdbcType=BIGINT}
+				</if>
+				<if test="coinId != null">
+					and coin_id = #{coinId,jdbcType=BIGINT}
+				</if>
+				<if test="address != null and address !=''">
+					and address = #{address,jdbcType=VARCHAR}
+				</if>
+				<if test="lowerAddress != null and lowerAddress !=''">
+					and lower_address = #{lowerAddress,jdbcType=VARCHAR}
+				</if>
+				<if test="password != null and password !=''">
+					and password = #{password,jdbcType=VARCHAR}
+				</if>
+				<if test="keystore != null and keystore !=''">
+					and keystore = #{keystore,jdbcType=VARCHAR}
+				</if>
+				<if test="valid != null and valid !=''">
+					and valid = #{valid,jdbcType=CHAR}
+				</if>
+				<if test="createTime != null">
+					and create_time = #{createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updateTime != null">
+					and update_time = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+    </where>
+	</sql>
+
+	<select id="getByAddress" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List"/>
+		from eth_user_wallet
+		where address = #{address} LIMIT 1;
+	</select>
+
+	<select id="existLowerAddress" resultType="string">
+		select lower_address
+		from eth_user_wallet
+		where lower_address in
+		<foreach collection="addressSet" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eth.web3j.mapper.EthTokenCoinConfigMapper">
+    <resultMap id="BaseResultMap" type="com.eth.web3j.domain.EthTokenCoinConfig">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="coin" property="coin" jdbcType="VARCHAR"/>
+        <result column="coin_id" property="coinId" jdbcType="BIGINT"/>
+        <result column="coin_type" property="coinType" jdbcType="VARCHAR"/>
+        <result column="contract" property="contract" jdbcType="VARCHAR"/>
+        <result column="token" property="token" jdbcType="VARCHAR"/>
+        <result column="round" property="round" jdbcType="INTEGER"/>
+        <result column="main_address" property="mainAddress" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="collect_address" property="collectAddress" jdbcType="VARCHAR"/>
+        <result column="account_name" property="accountName" jdbcType="VARCHAR"/>
+        <result column="block_no" property="blockNo" jdbcType="BIGINT"/>
+        <result column="valid" property="valid" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id ,
+		coin,
+		coin_id,
+		coin_type,
+		contract,
+		token,
+		round,
+		main_address,
+		password,
+		collect_address,
+		account_name,
+		block_no,
+		valid,
+		remark,
+		create_time,
+		update_time
+    </sql>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="coin != null and coin !=''">
+                and coin = #{coin,jdbcType=VARCHAR}
+            </if>
+            <if test="coinId != null">
+                and coin_id = #{coinId,jdbcType=BIGINT}
+            </if>
+            <if test="coinType != null and coinType !=''">
+                and coin_type = #{coinType,jdbcType=VARCHAR}
+            </if>
+            <if test="contract != null and contract !=''">
+                and contract = #{contract,jdbcType=VARCHAR}
+            </if>
+            <if test="token != null and token !=''">
+                and token = #{token,jdbcType=VARCHAR}
+            </if>
+            <if test="round != null">
+                and round = #{round,jdbcType=INTEGER}
+            </if>
+            <if test="mainAddress != null and mainAddress !=''">
+                and main_address = #{mainAddress,jdbcType=VARCHAR}
+            </if>
+            <if test="password != null and password !=''">
+                and password = #{password,jdbcType=VARCHAR}
+            </if>
+            <if test="collectAddress != null and collectAddress !=''">
+                and collect_address = #{collectAddress,jdbcType=VARCHAR}
+            </if>
+            <if test="accountName != null and accountName !=''">
+                and account_name = #{accountName,jdbcType=VARCHAR}
+            </if>
+            <if test="blockNo != null">
+                and block_no = #{blockNo,jdbcType=BIGINT}
+            </if>
+            <if test="valid != null and valid !=''">
+                and valid = #{valid,jdbcType=VARCHAR}
+            </if>
+            <if test="remark != null and remark !=''">
+                and remark = #{remark,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </sql>
+
+    <update id="updateActionSeqById">
+        UPDATE eth_token_coin_config
+        SET block_no = #{blockNo},
+            update_time = NOW()
+        WHERE id=#{id}
+    </update>
+
+
+    <select id="getEnableAllByType" resultType="com.eth.web3j.domain.EthTokenCoinConfig">
+        SELECT
+        <include refid="Base_Column_List"/>
+        where coin_type=#{type}
+        FROM eth_token_coin_config
+        WHERE valid='E'
+    </select>
+
+</mapper>

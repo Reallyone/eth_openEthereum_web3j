@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eth.web3j.mapper.EthTokenCollectMapper">
+	<resultMap id="BaseResultMap" type="com.eth.web3j.domain.EthTokenCollect">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="receiver" property="receiver" jdbcType="VARCHAR" />
+		<result column="contract" property="contract" jdbcType="VARCHAR" />
+		<result column="token" property="token" jdbcType="VARCHAR" />
+		<result column="coin_id" property="coinId" jdbcType="BIGINT" />
+		<result column="coin_type" property="coinType" jdbcType="VARCHAR" />
+		<result column="coin_name" property="coinName" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,
+		receiver,
+		contract,
+		token,
+		coin_id,
+		coin_type,
+		coin_name,
+		status,
+		remark,
+		create_time,
+		update_time
+	</sql>
+	<sql id="Example_Where_Clause">
+		<where>
+				<if test="id != null">
+					id = #{id,jdbcType=BIGINT}
+				</if>
+				<if test="receiver != null and receiver !=''">
+					and receiver = #{receiver,jdbcType=VARCHAR}
+				</if>
+				<if test="contract != null and contract !=''">
+					and contract = #{contract,jdbcType=VARCHAR}
+				</if>
+				<if test="token != null and token !=''">
+					and token = #{token,jdbcType=VARCHAR}
+				</if>
+				<if test="coinId != null">
+					and coin_id = #{coinId,jdbcType=BIGINT}
+				</if>
+				<if test="coinType != null and coinType !=''">
+					and coin_type = #{coinType,jdbcType=VARCHAR}
+				</if>
+				<if test="coinName != null and coinName !=''">
+					and coin_name = #{coinName,jdbcType=VARCHAR}
+				</if>
+				<if test="status != null">
+					and status = #{status,jdbcType=SMALLINT}
+				</if>
+				<if test="remark != null and remark !=''">
+					and remark = #{remark,jdbcType=VARCHAR}
+				</if>
+				<if test="createTime != null">
+					and create_time = #{createTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updateTime != null">
+					and update_time = #{updateTime,jdbcType=TIMESTAMP}
+				</if>
+    </where>
+	</sql>
+
+    <update id="updateByContractAndId">
+		update eth_token_collect set status = 1, update_time = NOW()
+		WHERE id IN
+		<foreach collection="idSet" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		AND contract=#{contract} AND receiver=#{address}
+	</update>
+
+    <select id="allByContract" resultType="com.eth.web3j.domain.EthTokenCollect">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM eth_token_collect WHERE contract = #{contract} and status=0;
+	</select>
+
+</mapper>

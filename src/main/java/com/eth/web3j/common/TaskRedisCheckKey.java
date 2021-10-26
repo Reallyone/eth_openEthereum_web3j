@@ -1,0 +1,15 @@
+package com.eth.web3j.common;
+
+public class TaskRedisCheckKey {
+
+    public static final String ETH_CREATE_ADDRESS_JOB_REDIS_CHECK_KEY = "ETH_CREATE_ADDRESS_JOB_REDIS_CHECK_KEY";
+    
+    public static final String ETH_TOKEN_COLLECT_JOB_REDIS_CHECK_KEY = "ETH_TOKEN_COLLECT_JOB_REDIS_CHECK_KEY";
+    
+    public static final String ETH_TOKEN_SEND_TRANSFER_FEE_JOB_REDIS_CHECK_KEY = "ETH_TOKEN_SEND_TRANSFER_FEE_JOB_REDIS_CHECK_KEY";
+    
+    public static final String ETH_TOKEN_RECHARGE_JOB_REDIS_CHECK_KEY = "ETH_TOKEN_RECHARGE_JOB_REDIS_CHECK_KEY";
+    
+    public static final String ETH_TOKEN_WITHDRAW_JOB_REDIS_CHECK_KEY = "ETH_TOKEN_WITHDRAW_JOB_REDIS_CHECK_KEY";
+
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eth.web3j.mapper.EthTokenAddressPoolMapper">
+    <resultMap id="BaseResultMap" type="com.eth.web3j.domain.EthTokenAddressPool">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="coin_id" property="coinId" jdbcType="BIGINT"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="keystore" property="keystore" jdbcType="VARCHAR"/>
+        <result column="pwd" property="pwd" jdbcType="VARCHAR"/>
+        <result column="coin_type" property="coinType" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,
+		coin_id,
+		address,
+		keystore,
+		pwd,
+		coin_type
+    </sql>
+    <sql id="Example_Where_Clause">
+        <where>
+            <if test="id != null">
+                id = #{id,jdbcType=BIGINT}
+            </if>
+            <if test="coinId != null">
+                and coin_id = #{coinId,jdbcType=BIGINT}
+            </if>
+            <if test="address != null and address !=''">
+                and address = #{address,jdbcType=VARCHAR}
+            </if>
+            <if test="keystore != null and keystore !=''">
+                and keystore = #{keystore,jdbcType=VARCHAR}
+            </if>
+            <if test="pwd != null and pwd !=''">
+                and pwd = #{pwd,jdbcType=VARCHAR}
+            </if>
+            <if test="coinType != null and coinType !=''">
+                and coin_type = #{coinType,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+</mapper>

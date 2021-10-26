@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eth.web3j.mapper.EthTokenRechargeMapper">
+	<resultMap id="BaseResultMap" type="com.eth.web3j.domain.EthTokenRecharge">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uid" property="uid" jdbcType="BIGINT" />
+		<result column="coin_id" property="coinId" jdbcType="BIGINT" />
+		<result column="coin_name" property="coinName" jdbcType="VARCHAR" />
+		<result column="coin_type" property="coinType" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="confirm" property="confirm" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="txid" property="txid" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="DECIMAL" />
+		<result column="fee" property="fee" jdbcType="DECIMAL" />
+		<result column="mum" property="mum" jdbcType="DECIMAL" />
+		<result column="block_number" property="blockNumber" jdbcType="INTEGER" />
+		<result column="last_update_time" property="lastUpdateTime" jdbcType="TIMESTAMP" />
+		<result column="created" property="created" jdbcType="TIMESTAMP" />
+		<result column="type" property="type" jdbcType="BIT" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id,
+		uid,
+		coin_id,
+		coin_name,
+		coin_type,
+		address,
+		confirm,
+		status,
+		txid,
+		num,
+		fee,
+		mum,
+		block_number,
+		last_update_time,
+		created,
+		type,
+		remark
+	</sql>
+
+	<sql id="Example_Where_Clause">
+		<where>
+				<if test="id != null">
+					id = #{id,jdbcType=BIGINT}
+				</if>
+				<if test="uid != null">
+					and uid = #{uid,jdbcType=BIGINT}
+				</if>
+				<if test="coinId != null">
+					and coin_id = #{coinId,jdbcType=BIGINT}
+				</if>
+				<if test="coinName != null and coinName !=''">
+					and coin_name = #{coinName,jdbcType=VARCHAR}
+				</if>
+				<if test="coinType != null and coinType !=''">
+					and coin_type = #{coinType,jdbcType=VARCHAR}
+				</if>
+				<if test="address != null and address !=''">
+					and address = #{address,jdbcType=VARCHAR}
+				</if>
+				<if test="confirm != null">
+					and confirm = #{confirm,jdbcType=INTEGER}
+				</if>
+				<if test="status != null">
+					and status = #{status,jdbcType=INTEGER}
+				</if>
+				<if test="txid != null and txid !=''">
+					and txid = #{txid,jdbcType=VARCHAR}
+				</if>
+				<if test="num != null">
+					and num = #{num,jdbcType=DECIMAL}
+				</if>
+				<if test="fee != null">
+					and fee = #{fee,jdbcType=DECIMAL}
+				</if>
+				<if test="mum != null">
+					and mum = #{mum,jdbcType=DECIMAL}
+				</if>
+				<if test="blockNumber != null">
+					and block_number = #{blockNumber,jdbcType=INTEGER}
+				</if>
+				<if test="lastUpdateTime != null">
+					and last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="created != null">
+					and created = #{created,jdbcType=TIMESTAMP}
+				</if>
+				<if test="type != null">
+					and type = #{type,jdbcType=BIT}
+				</if>
+				<if test="remark != null and remark !=''">
+					and remark = #{remark,jdbcType=VARCHAR}
+				</if>
+    </where>
+	</sql>
+	
+</mapper>
